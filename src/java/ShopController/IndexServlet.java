@@ -4,23 +4,18 @@
  */
 package ShopController;
 
-import DAO.BookDAO;
-import DAO.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Book;
-import model.Category;
 
 /**
  *
  * @author User
  */
-public class ShopServlet extends HttpServlet {
+public class IndexServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +34,10 @@ public class ShopServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShopServlet</title>");            
+            out.println("<title>Servlet IndexServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShopServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet IndexServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,18 +55,7 @@ public class ShopServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Step 1: Procesing Data
-        //1. List Category of Book
-        CategoryDAO catedao = new CategoryDAO();
-        List<Category> listcate = catedao.GetAllCategory();
-        //2. List Book
-        BookDAO bookdao = new BookDAO();
-        List<Book> listbook = bookdao.GetAllBook();
-        //Set Attribute Here:
-        request.setAttribute("listcate", listcate);
-        request.setAttribute("listbook", listbook);
-        //Step 2: Send Redirect User
-        request.getRequestDispatcher("shop.jsp").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     /**

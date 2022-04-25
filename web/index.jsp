@@ -32,21 +32,7 @@
   <div class="site-wrap">
       <jsp:include page="module/header.jsp" flush="true"/>
 
-    <div class="site-blocks-cover" style="background-image: url(images/hero_1.jpg);" data-aos="fade">
-      <div class="container">
-        <div class="row align-items-start align-items-md-center justify-content-end">
-          <div class="col-md-5 text-center text-md-left pt-5 pt-md-0">
-            <h1 class="mb-2">Finding Your Perfect Shoes</h1>
-            <div class="intro-text text-center text-md-left">
-              <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla. </p>
-              <p>
-                <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
     <div class="site-section site-section-sm site-blocks-1">
       <div class="container">
@@ -82,45 +68,8 @@
       </div>
     </div>
 
-    <div class="site-section site-blocks-2">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-            <a class="block-2-item" href="#">
-              <figure class="image">
-                <img src="images/women.jpg" alt="" class="img-fluid">
-              </figure>
-              <div class="text">
-                <span class="text-uppercase">Collections</span>
-                <h3>Women</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
-            <a class="block-2-item" href="#">
-              <figure class="image">
-                <img src="images/children.jpg" alt="" class="img-fluid">
-              </figure>
-              <div class="text">
-                <span class="text-uppercase">Collections</span>
-                <h3>Children</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-            <a class="block-2-item" href="#">
-              <figure class="image">
-                <img src="images/men.jpg" alt="" class="img-fluid">
-              </figure>
-              <div class="text">
-                <span class="text-uppercase">Collections</span>
-                <h3>Men</h3>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+       
 
     <div class="site-section block-3 site-blocks-2 bg-light">
       <div class="container">
@@ -251,14 +200,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-            <h3 class="footer-heading mb-4">Promo</h3>
-            <a href="#" class="block-6">
-              <img src="images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded mb-4">
-              <h3 class="font-weight-light  mb-0">Finding Your Perfect Shoes</h3>
-              <p>Promo from  nuary 15 &mdash; 25, 2019</p>
-            </a>
-          </div>
+          
           <div class="col-md-6 col-lg-3">
             <div class="block-5 mb-5">
               <h3 class="footer-heading mb-4">Contact Info</h3>
