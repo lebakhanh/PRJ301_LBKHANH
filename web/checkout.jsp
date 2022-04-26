@@ -110,14 +110,14 @@
                     <c:forEach items="${sessionScope.carts}" var="c">
                         <tbody>
                       <tr>
-                        <td>${c.value.shoes.name} <strong class="mx-2">x</strong> ${c.value.quantity}</td>
-                        <td>$${c.value.shoes.price*c.value.quantity}</td>
+                        <td>${c.value.book.name} <strong class="mx-2">x</strong> ${c.value.quantity}</td>
+                        <td>$${c.value.book.price*c.value.quantity}</td>
                       </tr>
                       </c:forEach>
                       
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                        <td class="text-black font-weight-bold"><strong>$350.00</strong></td>
+                        <td class="text-black font-weight-bold"><strong>$${total}</strong></td>
                       </tr>
                     </tbody>
                     
