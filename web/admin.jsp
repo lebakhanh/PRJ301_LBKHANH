@@ -3,7 +3,7 @@
     Created on : Apr 26, 2022, 3:43:25 AM
     Author     : User
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +47,7 @@
                         <!-- COUNTER -->
                         <div class="counter">
                             <div class="counter-title">
-                                total order
+                                total book
                             </div>
                             <div class="counter-info">
                                 <div class="counter-count">
@@ -64,7 +64,7 @@
                         <!-- COUNTER -->
                         <div class="counter">
                             <div class="counter-title">
-                                conversion rate
+                                total order
                             </div>
                             <div class="counter-info">
                                 <div class="counter-count">
@@ -98,7 +98,7 @@
                         <!-- COUNTER -->
                         <div class="counter">
                             <div class="counter-title">
-                                daily visitors
+                                total users
                             </div>
                             <div class="counter-info">
                                 <div class="counter-count">
@@ -121,58 +121,23 @@
                         </div>
                         <div class="box-body">
                             <ul class="product-list">
-                                <li class="product-list-item">
+                                <c:forEach items="${requestScope.listbook}" var="b">
+                                    <li class="product-list-item">
                                     <div class="item-info">
-                                        <img src="./images/thumb-7.jpg" alt="product image">
+                                        <img src="images/${b.image}" alt="product image">
                                         <div class="item-name">
-                                            <div class="product-name">Jacket</div>
-                                            <div class="text-second">Cloths</div>
+                                            <div class="product-name">${b.name}</div>
+                                            
                                         </div>
                                     </div>
                                     <div class="item-sale-info">
                                         <div class="text-second">Sales</div>
-                                        <div class="product-sales">$5,930</div>
+                                        <div class="product-sales">$${b.price}</div>
                                     </div>
                                 </li>
-                                <li class="product-list-item">
-                                    <div class="item-info">
-                                        <img src="./images/sneaker.jpg" alt="product image">
-                                        <div class="item-name">
-                                            <div class="product-name">sneaker</div>
-                                            <div class="text-second">Cloths</div>
-                                        </div>
-                                    </div>
-                                    <div class="item-sale-info">
-                                        <div class="text-second">Sales</div>
-                                        <div class="product-sales">$5,930</div>
-                                    </div>
-                                </li>
-                                <li class="product-list-item">
-                                    <div class="item-info">
-                                        <img src="./images/headphone.jpg" alt="product image">
-                                        <div class="item-name">
-                                            <div class="product-name">headphone</div>
-                                            <div class="text-second">Devices</div>
-                                        </div>
-                                    </div>
-                                    <div class="item-sale-info">
-                                        <div class="text-second">Sales</div>
-                                        <div class="product-sales">$5,930</div>
-                                    </div>
-                                </li>
-                                <li class="product-list-item">
-                                    <div class="item-info">
-                                        <img src="./images/backpack.jpg" alt="product image">
-                                        <div class="item-name">
-                                            <div class="product-name">Backpack</div>
-                                            <div class="text-second">Bags</div>
-                                        </div>
-                                    </div>
-                                    <div class="item-sale-info">
-                                        <div class="text-second">Sales</div>
-                                        <div class="product-sales">$5,930</div>
-                                    </div>
-                                </li>
+                                </c:forEach>
+                                
+                                
                             </ul>
                         </div>
                     </div>
@@ -199,140 +164,7 @@
                     </div>
                     <!-- END CUSTOMERS CHART -->
                 </div>
-                <div class="col-12">
-                    <!-- ORDERS TABLE -->
-                    <div class="box">
-                        <div class="box-header">
-                            Recent orders
-                        </div>
-                        <div class="box-body overflow-scroll">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Customer</th>
-                                        <th>Date</th>
-                                        <th>Order status</th>
-                                        <th>Payment status</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#2345</td>
-                                        <td>
-                                            <div class="order-owner">
-                                                <img src="./images/user-image.jpg" alt="user image">
-                                                <span>tuat tran anh</span>
-                                            </div>
-                                        </td>
-                                        <td>2021-05-09</td>
-                                        <td>
-                                            <span class="order-status order-ready">
-                                                Ready
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="payment-status payment-pending">
-                                                <div class="dot"></div>
-                                                <span>Pending</span>
-                                            </div>
-                                        </td>
-                                        <td>$123.45</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#2345</td>
-                                        <td>
-                                            <div class="order-owner">
-                                                <img src="./images/user-image-2.png" alt="user image">
-                                                <span>John doe</span>
-                                            </div>
-                                        </td>
-                                        <td>2021-05-09</td>
-                                        <td>
-                                            <span class="order-status order-shipped">
-                                                Shipped
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="payment-status payment-paid">
-                                                <div class="dot"></div>
-                                                <span>Paid</span>
-                                            </div>
-                                        </td>
-                                        <td>$123.45</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#2345</td>
-                                        <td>
-                                            <div class="order-owner">
-                                                <img src="./images/user-image-3.png" alt="user image">
-                                                <span>evelyn</span>
-                                            </div>
-                                        </td>
-                                        <td>2021-05-09</td>
-                                        <td>
-                                            <span class="order-status order-shipped">
-                                                Shipped
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="payment-status payment-paid">
-                                                <div class="dot"></div>
-                                                <span>Paid</span>
-                                            </div>
-                                        </td>
-                                        <td>$123.45</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#2345</td>
-                                        <td>
-                                            <div class="order-owner">
-                                                <img src="./images/user-image-2.png" alt="user image">
-                                                <span>John doe</span>
-                                            </div>
-                                        </td>
-                                        <td>2021-05-09</td>
-                                        <td>
-                                            <span class="order-status order-shipped">
-                                                Shipped
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="payment-status payment-paid">
-                                                <div class="dot"></div>
-                                                <span>Paid</span>
-                                            </div>
-                                        </td>
-                                        <td>$123.45</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#2345</td>
-                                        <td>
-                                            <div class="order-owner">
-                                                <img src="./images/user-image-3.png" alt="user image">
-                                                <span>evelyn</span>
-                                            </div>
-                                        </td>
-                                        <td>2021-05-09</td>
-                                        <td>
-                                            <span class="order-status order-shipped">
-                                                Shipped
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="payment-status payment-paid">
-                                                <div class="dot"></div>
-                                                <span>Paid</span>
-                                            </div>
-                                        </td>
-                                        <td>$123.45</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- END ORDERS TABLE -->
+                
                 </div>
             </div>
         </div>

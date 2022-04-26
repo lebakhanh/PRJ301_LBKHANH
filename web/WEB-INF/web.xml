@@ -40,6 +40,26 @@
         <servlet-name>DeleteCategoryServlet</servlet-name>
         <servlet-class>AdminController.DeleteCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteBook</servlet-name>
+        <servlet-class>AdminController.DeleteBook</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShopSingleServlet</servlet-name>
+        <servlet-class>ShopController.ShopSingleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>CartController.CartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuyServlet</servlet-name>
+        <servlet-class>CartController.BuyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <servlet-class>CartController.CheckOutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopServlet</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -89,6 +109,26 @@
     <servlet-mapping>
         <servlet-name>DeleteCategoryServlet</servlet-name>
         <url-pattern>/delete-category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBook</servlet-name>
+        <url-pattern>/delete-book</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopSingleServlet</servlet-name>
+        <url-pattern>/shop-single</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyServlet</servlet-name>
+        <url-pattern>/buy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

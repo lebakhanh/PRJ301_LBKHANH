@@ -76,7 +76,12 @@ public class BookDAO extends DBContext{
     }
 
     public void UpdateBook(Book b) {
-         String sql = "Update Book set Book_name = ?, Book_price = ? , Book_quanlity = ? , Book_image = ?, category_id = ? where Book_id = ?";
+         String sql = "UPDATE [Book] SET [Book_name] = ?\n" +
+"      ,[Book_price] = ?\n" +
+"      ,[Book_quantity] = ?\n" +
+"      ,[Book_image] = ?\n" +
+"      ,[category_id] = ?\n" +
+" WHERE Book_id = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, b.getName());
@@ -88,5 +93,72 @@ public class BookDAO extends DBContext{
             st.executeUpdate();
         } catch (Exception ex) {
         }
+    }
+
+    public void DeleteBook(int id) {
+        String sql = "DELETE FROM [Book]"
+                + "      WHERE Book_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (Exception ex) {
+        }
+    }
+    public List<Book> getListByPage(List<Book> list,
+            int start, int end) {
+        ArrayList<Book> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
+    public List<Book> SearchBookByName(String search) {
+        String sql = "select * from Book b join Category c on (b.Book_id = c.category_id) where b.Book_name like ?";
+        List<Book> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%"+search+"%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Category g = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                Book b = new Book(rs.getInt("Book_id"), rs.getString("Book_name"), rs.getFloat("Book_price"), rs.getInt("Book_quantity"), rs.getString("Book_image"), g);
+                list.add(b);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    public List<Book> SearchBookByCategory(int cid) {
+        String sql = "select * from Book b join Category c on (b.Book_id = c.category_id) where c.category_id = ?";
+        List<Book> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Category g = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                Book b = new Book(rs.getInt("Book_id"), rs.getString("Book_name"), rs.getFloat("Book_price"), rs.getInt("Book_quantity"), rs.getString("Book_image"), g);
+                list.add(b);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    public List<Book> GetTopBook() {
+        String sql = "select TOP 4 * from Book b join Category c on (b.Book_id = c.category_id)";
+        List<Book> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Category g = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                Book b = new Book(rs.getInt("Book_id"), rs.getString("Book_name"), rs.getFloat("Book_price"), rs.getInt("Book_quantity"), rs.getString("Book_image"), g);
+                list.add(b);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
     }
 }

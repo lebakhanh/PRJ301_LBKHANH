@@ -30,7 +30,7 @@
         <!-- SIDEBAR MENU -->
         <ul class="sidebar-menu">
             <li>
-                <a href="#" class="active">
+                <a href="admin" class="active">
                     <i class='bx bx-home'></i>
                     <span>dashboard</span>
                 </a>

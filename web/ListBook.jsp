@@ -22,8 +22,8 @@
         <link rel="stylesheet" href="css/app.css">
         <script type="text/javascript">
             function doDelete(id){
-                if(confirm("Are u sure to delete product with id="+id+" ?")){
-                    window.location="delete?id="+id;
+                if(confirm("Are u sure to delete Book with id="+id+" ?")){
+                    window.location="delete-book?id="+id;
                 }
             }
         </script>
@@ -97,7 +97,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="order-status order-ready">
-                                                        <a href="single-product?id=${p.id}">View</td>
+                                                        <a href="shop-single?id=${p.id}">View</td>
                                                     </span>
                                                 </td>
                                                 
