@@ -74,4 +74,19 @@ public class BookDAO extends DBContext{
         List<Book> listb = bookdao.GetAllBook();
         System.out.println(listb.get(0).getName());
     }
+
+    public void UpdateBook(Book b) {
+         String sql = "Update Book set Book_name = ?, Book_price = ? , Book_quanlity = ? , Book_image = ?, category_id = ? where Book_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, b.getName());
+            st.setFloat(2, b.getPrice());
+            st.setInt(3, b.getQuantity());
+            st.setString(4, b.getImage());
+            st.setInt(5, b.getCategoryid().getId());
+            st.setInt(6, b.getId());
+            st.executeUpdate();
+        } catch (Exception ex) {
+        }
+    }
 }

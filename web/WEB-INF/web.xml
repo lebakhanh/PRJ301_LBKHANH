@@ -32,6 +32,14 @@
         <servlet-name>UpdateBookServlet</servlet-name>
         <servlet-class>AdminController.UpdateBookServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListCategory</servlet-name>
+        <servlet-class>AdminController.ListCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <servlet-class>AdminController.DeleteCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopServlet</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -73,6 +81,14 @@
     <servlet-mapping>
         <servlet-name>UpdateBookServlet</servlet-name>
         <url-pattern>/update-book</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCategory</servlet-name>
+        <url-pattern>/list-category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <url-pattern>/delete-category</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

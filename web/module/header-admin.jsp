@@ -17,7 +17,7 @@
             <div class="sidebar-user-info">
                 <img src="./images/user-image.jpg" alt="User picture" class="profile-image">
                 <div class="sidebar-user-name">
-                    anh tuat
+                   Hello ${sessionScope.admin.username} !!
                 </div>
             </div>
             <a href="logout">
@@ -65,15 +65,11 @@
                 </a>
                 <ul class="sidebar-menu sidebar-menu-dropdown-content">
                     <li>
-                        <a href="#">
+                        <a href="list-category">
                             List Category
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            Add Category
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
             <li class="sidebar-submenu">
@@ -84,15 +80,11 @@
                 </a>
                 <ul class="sidebar-menu sidebar-menu-dropdown-content">
                     <li>
-                        <a href="#">
+                        <a href="list-order">
                             List Order
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            Add Book
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
             <li class="sidebar-submenu">
@@ -103,7 +95,7 @@
                 </a>
                 <ul class="sidebar-menu sidebar-menu-dropdown-content">
                     <li>
-                        <a href="#">
+                        <a href="list-user">
                             List User
                         </a>
                     </li>

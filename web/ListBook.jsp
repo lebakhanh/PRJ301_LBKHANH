@@ -86,7 +86,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="order-status order-ready">
-                                                        <a href="update?id=${p.id}">Update</td>
+                                                        <a href="update-book?id=${p.id}">Update</td>
                                                     </span>
                                                  
                                                 </td>
