@@ -2,10 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package AdminController;
+package AccountController;
 
-import DAO.BookDAO;
-import DAO.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,16 +11,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 import model.Account;
-import model.Book;
-import model.Category;
 
 /**
  *
  * @author User
  */
-public class ListBookServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +36,10 @@ public class ListBookServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListBookServlet</title>");            
+            out.println("<title>Servlet LogoutServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListBookServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,22 +57,15 @@ public class ListBookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Step 1: Get session admin and check.
-        HttpSession session = request.getSession(true);
-        Account acc = (Account) session.getAttribute("admin");
-        if (acc == null) {
-            PrintWriter out = response.getWriter();
-            out.println("Access denied");
-        } else {
-        //Step 2: Get all shoes and put it to admin dashboard.
-            BookDAO bookdao = new BookDAO();
-            List<Book> booklist = bookdao.GetAllBook();
-            CategoryDAO catedao = new CategoryDAO();
-            List<Category> catelist = catedao.GetAllCategory();
-            request.setAttribute("catelist", catelist);
-            request.setAttribute("booklist", booklist);
-        //Step 3: Forward to list-shoes
-            request.getRequestDispatcher("ListBook.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        Account a =(Account) session.getAttribute("user");
+        Account b =(Account) session.getAttribute("admin");
+        if(a!= null || b!= null){
+            session.removeAttribute("user");
+            session.removeAttribute("admin");
+            response.sendRedirect("shop");       
+        }else{
+             response.sendRedirect("shop");
         }
     }
 

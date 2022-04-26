@@ -20,9 +20,12 @@
                     anh tuat
                 </div>
             </div>
-            <button class="btn btn-outline">
+            <a href="logout">
+                <button class="btn btn-outline">
                 <i class='bx bx-log-out bx-flip-horizontal'></i>
-            </button>
+            </button> 
+            </a>
+           
         </div>
         <!-- SIDEBAR MENU -->
         <ul class="sidebar-menu">

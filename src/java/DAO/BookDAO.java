@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import com.oracle.wls.shaded.org.apache.bcel.generic.AALOAD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,5 +32,46 @@ public class BookDAO extends DBContext{
         } catch (SQLException e) {
         }
         return list;
+    }
+    public Book GetBookByID(int id) {
+        String sql = "select * from Book b join Category c on (b.Book_id = c.category_id) where b.Book_id = ?";
+      
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Category g = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                Book b = new Book(rs.getInt("Book_id"), rs.getString("Book_name"), rs.getFloat("Book_price"), rs.getInt("Book_quantity"), rs.getString("Book_image"), g);
+               return b;
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+    public void add(Book p) {
+        String sql = "INSERT INTO [Book]\n" +
+"           ([Book_name]\n" +
+"           ,[Book_price]\n" +
+"           ,[Book_quantity]\n" +
+"           ,[Book_image]\n" +
+"           ,[category_id])\n" +
+"     VALUES\n" +
+"           (?,?,?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, p.getName());
+            st.setFloat(2, p.getPrice());
+            st.setInt(3, p.getQuantity());
+            st.setString(4, p.getImage());
+            st.setInt(5, p.getCategoryid().getId());
+            st.executeUpdate();
+        } catch (Exception ex) {
+        }
+    }
+    public static void main(String[] args) {
+        BookDAO bookdao = new BookDAO();
+        List<Book> listb = bookdao.GetAllBook();
+        System.out.println(listb.get(0).getName());
     }
 }

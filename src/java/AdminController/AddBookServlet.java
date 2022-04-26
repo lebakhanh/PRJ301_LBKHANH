@@ -22,7 +22,7 @@ import model.Category;
  *
  * @author User
  */
-public class ListBookServlet extends HttpServlet {
+public class AddBookServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class ListBookServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListBookServlet</title>");            
+            out.println("<title>Servlet AddBookServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListBookServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddBookServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,15 +69,15 @@ public class ListBookServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println("Access denied");
         } else {
-        //Step 2: Get all shoes and put it to admin dashboard.
+            //Step 2: Get all shoes and put it to admin dashboard.
             BookDAO bookdao = new BookDAO();
             List<Book> booklist = bookdao.GetAllBook();
             CategoryDAO catedao = new CategoryDAO();
             List<Category> catelist = catedao.GetAllCategory();
             request.setAttribute("catelist", catelist);
             request.setAttribute("booklist", booklist);
-        //Step 3: Forward to list-shoes
-            request.getRequestDispatcher("ListBook.jsp").forward(request, response);
+            //Step 3: Forward to list-shoes
+            request.getRequestDispatcher("AddBook.jsp").forward(request, response);
         }
     }
 
@@ -92,7 +92,31 @@ public class ListBookServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String name = request.getParameter("name");
+        String price_raw = request.getParameter("price");
+        String quanlity_raw = request.getParameter("quanlity");
+        String image = request.getParameter("image");
+        String category_raw = request.getParameter("cate");
+
+        BookDAO bookdao = new BookDAO();
+        CategoryDAO catedao = new CategoryDAO();
+        try {
+
+            int price = Integer.parseInt(price_raw);
+            int quanlity = Integer.parseInt(quanlity_raw);
+            int category = Integer.parseInt(category_raw);
+
+           
+
+            Category c = new Category(category, catedao.GetNameCategoryByID(category));
+            Book b = new Book(0, name, price, quanlity, image, c);
+            bookdao.add(b);
+            response.sendRedirect("list-book");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /**

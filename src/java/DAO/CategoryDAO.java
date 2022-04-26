@@ -29,6 +29,20 @@ public class CategoryDAO extends DBContext{
         }
         return list;
     }
+    public String GetNameCategoryByID(int id) {
+        String sql = "select category_name from [Category] where category_id = ?";
+        String n = "";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                n = rs.getString("category_name");
+            }
+        } catch (SQLException e) {
+        }
+        return n;
+    }
     public static void main(String[] args) {
         CategoryDAO dao = new CategoryDAO();
         List<Category> list = dao.GetAllCategory();

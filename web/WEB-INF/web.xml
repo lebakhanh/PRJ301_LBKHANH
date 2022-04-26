@@ -20,6 +20,18 @@
         <servlet-name>ListBookServlet</servlet-name>
         <servlet-class>AdminController.ListBookServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>AccountController.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddBookServlet</servlet-name>
+        <servlet-class>AdminController.AddBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBookServlet</servlet-name>
+        <servlet-class>AdminController.UpdateBookServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopServlet</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -49,6 +61,18 @@
     <servlet-mapping>
         <servlet-name>ListBookServlet</servlet-name>
         <url-pattern>/list-book</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBookServlet</servlet-name>
+        <url-pattern>/add-book</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBookServlet</servlet-name>
+        <url-pattern>/update-book</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

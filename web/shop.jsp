@@ -122,7 +122,7 @@
                                 <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories Book</h3>
                                 <ul class="list-unstyled mb-0">
                                     <c:forEach items="${requestScope.listcate}" var="c">
-                                        <li class="mb-1"><a href="#" class="d-flex"><span>${c.name}</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+                                        <li class="mb-1"><a href="#" class="d-flex"><span>${c.name}</span></a></li>
                                     </c:forEach>
                                 </ul>
                             </div>

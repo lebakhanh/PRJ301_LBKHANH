@@ -1,153 +1,129 @@
-<%-- 
-    Document   : ListBook
-    Created on : Apr 26, 2022, 3:53:23 AM
-    Author     : User
---%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Admin Dashboard</title>
-        <!-- plugins:css -->
-        <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
-        <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
-        <!-- endinject -->
-        <!-- Plugin css for this page -->
-        <link rel="stylesheet" href="assets/vendors/jvectormap/jquery-jvectormap.css">
-        <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
-        <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.carousel.min.css">
-        <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.theme.default.min.css">
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
-        <!-- endinject -->
-        <!-- Layout styles -->
-        <link rel="stylesheet" href="assets/css/style.css">
-        <!-- End layout styles -->
-        <link rel="shortcut icon" href="assets/images/favicon.png" />
-<script type="text/javascript">
-            function doDelete(id) {
-                if (confirm("Are u sure to delete product with id=" + id + " ?")) {
-                    window.location = "delete-user?id=" + id;
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Admin Dashboard
+        </title>
+        <link rel="shortcut icon" href="/images/logo-mb.png" type="image/png">
+        <!-- GOOGLE FONT -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <!-- BOXICONS -->
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+        <!-- APP CSS -->
+        <link rel="stylesheet" href="css/grid.css">
+        <link rel="stylesheet" href="css/app.css">
+        <script type="text/javascript">
+            function doDelete(id){
+                if(confirm("Are u sure to delete product with id="+id+" ?")){
+                    window.location="delete?id="+id;
                 }
             }
         </script>
     </head>
+
     <body>
-        <div class="container-scroller">
-            <!-- partial:partials/_sidebar.html -->
-            <jsp:include page="module/header-admin.jsp"></jsp:include>
-                <!-- partial -->
-                <div class="main-panel">
-                    <div class="content-wrapper">
+
+        <jsp:include page="module/header-admin.jsp" flush="true"/>
+
+        <!-- MAIN CONTENT -->
+        <div class="main">
+            <div class="main-header">
+                <div class="mobile-toggle" id="mobile-toggle">
+                    <i class='bx bx-menu-alt-right'></i>
+                </div>
+                <div class="main-title">
+                    dashboard
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- ORDERS TABLE -->
+                        <div class="box">
+                            <div class="box-header">
+                                List Product
+                            </div>
+                            <div class="box-body overflow-scroll">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Category</th>
+                                            <th>Quanlity</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                            <th>View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${requestScope.booklist}" var="p">
+                                            <tr>
+                                                <td>#${p.id}</td>
+                                                <td>
+                                                    <div class="order-owner">
+                                                        <img src="images/${p.image}">
+                                                        <span>${p.name}</span>
+                                                    </div>
+                                                </td>
+                                                <td>$ ${p.price}</td>
+                                                <td>
+                                                    
+                                                        ${p.categoryid.name}
+                                                    
+                                                </td>
+                                                <td>
+                                                    ${p.quantity}
+                                                </td>
+                                                <td>
+                                                    <span class="order-status order-ready">
+                                                        <a href="update?id=${p.id}">Update</td>
+                                                    </span>
+                                                 
+                                                </td>
+                                                <td>
+                                                    <span class="order-status order-ready">
+                                                        <a href="#" onclick="doDelete('${p.id}')">Delete</td>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="order-status order-ready">
+                                                        <a href="single-product?id=${p.id}">View</td>
+                                                    </span>
+                                                </td>
+                                                
+                                            </tr>    
+                                        </c:forEach>
 
 
-                       <div class="row ">
-                            <div class="col-12 grid-margin">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Manager Shoes List</h4>
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>
-                                                            <div class="form-check form-check-muted m-0">
-                                                                <label class="form-check-label">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                </label>
-                                                            </div>
-                                                        </th>
-                                                        <th> Shoes NO. </th>
-                                                        <th> Shoes Name </th>
-                                                        <th> Price </th>
-                                                        <th> Color </th>
-                                                        <th> Category </th>
-                                                        <th> Quantity </th>
-                                                        <th> Update </th>
-                                                        <th> Delete </th>
-                                                        <th> View </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach items="${requestScope.shoeslist}" var="shoes">
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check form-check-muted m-0">
-                                                                <label class="form-check-label">
-                                                                    <input type="checkbox" class="form-check-input">
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        
-                                                        <td> ${shoes.id} </td>
-                                                        <td>
-                                                            <img src="images/${shoes.image}" alt="image" />
-                                                            <span class="pl-2">${shoes.name}</span>
-                                                        </td>
-                                                        <td> $${shoes.price} </td>
-                                                        <td> ${shoes.color.name} </td>
-                                                        <td> ${shoes.category.name} </td>
-                                                        <td> ${shoes.quantity} </td>
-                                                        <td>
-                                                            <div class="badge badge-outline-warning"><a href="update-shoes?id=${shoes.id}">Update</a></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-outline-danger"><a href="#" onclick="doDelete('${shoes.id}')">Delete</td></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-outline-success"><a href="shop-single?id=${shoes.id}">View</a></div>
-                                                        </td>
-
-                                                    </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-
-                </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
+                        <!-- END ORDERS TABLE -->
                     </div>
-                </footer>
-                <!-- partial -->
+                </div>
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="assets/vendors/chart.js/Chart.min.js"></script>
-    <script src="assets/vendors/progressbar.js/progressbar.min.js"></script>
-    <script src="assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
-    <script src="assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="assets/js/off-canvas.js"></script>
-    <script src="assets/js/hoverable-collapse.js"></script>
-    <script src="assets/js/misc.js"></script>
-    <script src="assets/js/settings.js"></script>
-    <script src="assets/js/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="assets/js/dashboard.js"></script>
-    <!-- End custom js for this page -->
-</body>
+        <!-- END MAIN CONTENT -->
+
+        <div class="overlay"></div>
+
+        <!-- SCRIPT -->
+        <!-- APEX CHART -->
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <!-- APP JS -->
+        <script src="js/app.js"></script>
+
+    </body>
+
 </html>
