@@ -128,4 +128,20 @@ public class OrderDAO extends DBContext {
         }
         return n;
     }
+public List<Order> GetAllOrderByStatus(String status) {
+        String sql = "select * from [Order] where status = ?";
+        List<Order> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, status);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Order order = new Order(rs.getInt("id"), rs.getString("fullname"), rs.getInt("account_id"), rs.getString("email"), rs.getString("phone_number"), rs.getString("address"), rs.getString("note"), rs.getString("status"), rs.getInt("total_money"), rs.getDate("Date"));
+                list.add(order);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
 }

@@ -32,20 +32,20 @@ public class AccountDAO extends DBContext {
         return null;
     }
     
-//    public List<Account> GetAllAccount() {
-//        String sql = "SELECT * FROM Account";
-//        List<Account> list = new ArrayList<>();
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                Account acc = new Account(rs.getInt("account_id"), rs.getString("account_name"), rs.getString("account_password"), rs.getString("account_email"), rs.getString("account_phone"), rs.getString("account_address"), rs.getBoolean("account_role"));
-//                list.add(acc);
-//            }
-//        } catch (SQLException e) {
-//        }
-//        return list;
-//    }
+    public List<Account> GetAllAccount() {
+        String sql = "SELECT * FROM Account";
+        List<Account> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Account acc = new Account(rs.getInt("account_id"), rs.getString("account_username"), rs.getString("account_password"), rs.getString("account_name"), rs.getString("account_email"), rs.getString("account_phone"), rs.getString("account_address"),rs.getBoolean("account_role"));
+                list.add(acc);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
 //    
 //    public void DeleteAccount(int id) {
 //        String sql = "DELETE FROM [Account]"
