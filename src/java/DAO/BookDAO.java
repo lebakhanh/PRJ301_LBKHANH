@@ -19,7 +19,7 @@ import model.Category;
  */
 public class BookDAO extends DBContext{
     public List<Book> GetAllBook() {
-        String sql = "select * from Book b join Category c on (b.Book_id = c.category_id)";
+        String sql = "select * from Book b join Category c on (b.category_id = c.category_id)";
         List<Book> list = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(sql);

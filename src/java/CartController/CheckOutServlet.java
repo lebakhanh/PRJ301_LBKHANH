@@ -115,9 +115,7 @@ public class CheckOutServlet extends HttpServlet {
 //                System.out.println(cart.getQuantity());
 //                System.out.println(cart.getQuantity()*cart.getShoes().getPrice());
 //            }
-//            
-            
-            
+//                   
             orderdao.SaveOrderDetail(n, carts);
             
             //Remove Carts
