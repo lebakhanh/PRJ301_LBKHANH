@@ -68,6 +68,10 @@
         <servlet-name>ListUserServlet</servlet-name>
         <servlet-class>AdminController.ListUserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>AdminController.DeleteUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopServlet</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -145,6 +149,10 @@
     <servlet-mapping>
         <servlet-name>ListUserServlet</servlet-name>
         <url-pattern>/list-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/delete-user</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -57,11 +57,13 @@
                                             <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuReference" data-toggle="dropdown">Reference</button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
                                                 <a class="dropdown-item" href="#">Relevance</a>
-                                                <a class="dropdown-item" href="#">Name, A to Z</a>
-                                                <a class="dropdown-item" href="#">Name, Z to A</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Price, low to high</a>
-                                                <a class="dropdown-item" href="#">Price, high to low</a>
+                                                <a class="dropdown-item" href="shop?sort=${1}">Price, low to high</a>
+                                                <a class="dropdown-item" href="shop?sort=${2}">Price, high to low</a>
+                                                <div class="dropdown-divider"></div>
+
+                                                <a class="dropdown-item" href="shop?sort=${3}">Name, A to Z</a>
+                                                <a class="dropdown-item" href="shop?sort=${4}">Name, Z to A</a>
                                             </div>
                                         </div>
                                     </div>
@@ -70,41 +72,41 @@
                             <div class="row mb-5">
                                 <c:forEach items="${requestScope.listbook}" var="b">
                                     <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                                    <div class="block-4 text-center border">
-                                        <figure class="block-4-image">
-                                            <a href="shop-single?id=${b.id}"><img src="images/${b.image}" alt="Image placeholder" class="img-fluid"></a>
-                                        </figure>
-                                        <div class="block-4-text p-4">
-                                            <h3><a href="shop-single?id=${b.id}">${b.name}</a></h3>
-                                            <p class="mb-0">Finding perfect t-shirt</p>
-                                            <p class="text-primary font-weight-bold">$ ${b.price}</p>
+                                        <div class="block-4 text-center border">
+                                            <figure class="block-4-image">
+                                                <a href="shop-single?id=${b.id}"><img src="images/${b.image}" alt="Image placeholder" class="img-fluid"></a>
+                                            </figure>
+                                            <div class="block-4-text p-4">
+                                                <h3><a href="shop-single?id=${b.id}">${b.name}</a></h3>
+                                                <p class="mb-0">Finding perfect t-shirt</p>
+                                                <p class="text-primary font-weight-bold">$ ${b.price}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>                              
+                                    </div>                              
                                 </c:forEach>
-                                
 
-                                
-                               
-                                
-                            
+
+
+
+
+
 
                             </div>
                             <div class="row" data-aos="fade-up">
                                 <div class="col-md-12 text-center">
                                     <div class="site-block-27">
                                         <ul>
-                                              <c:if test="${page>1}">
-                                            <li><a href="shop?page=${page-1}">&lt;</a></li>
-                                              </c:if>
-                                              <c:forEach begin="1" end="${requestScope.num}" var="n">
-                                              <li class="${n==page?"active":""}" ><span><a href="shop?page=${n}">${n}</a></span></li>
-                                              </c:forEach>
-                                           
+                                            <c:if test="${page>1}">
+                                                <li><a href="shop?page=${page-1}">&lt;</a></li>
+                                                </c:if>
+                                                <c:forEach begin="1" end="${requestScope.num}" var="n">
+                                                <li class="${n==page?"active":""}" ><span><a href="shop?page=${n}">${n}</a></span></li>
+                                                        </c:forEach>
+
                                             <c:if test="${page<num}">
-                                            <li><a href="shop?page=${page+1}">&gt;</a></li>
-                                              </c:if>
-                                            
+                                                <li><a href="shop?page=${page+1}">&gt;</a></li>
+                                                </c:if>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -117,16 +119,16 @@
                                 <ul class="list-unstyled mb-0">
                                     <c:forEach items="${requestScope.listcate}" var="c">
                                         <li class="mb-1"><a href="shop?cid=${c.id}" class="d-flex"><span>${c.name}</span></a></li>
-                                    </c:forEach>
+                                                </c:forEach>
                                 </ul>
                             </div>
 
-                          
+
                         </div>
                     </div>
 
-                  
-                    
+
+
 
                 </div>
             </div>

@@ -35,15 +35,15 @@
     <div class="bg-light py-3">
       <div class="container">
         <div class="row">
-            <c:forEach items="${book}" var="book">
-          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">${book.name}</strong></div>
+            
+          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black"></strong></div>
         </div>
       </div>
     </div>  
 
     <div class="site-section">
       <div class="container">
-          
+          <c:forEach items="${requestScope.book}" var="book">
         <div class="row">
           <div class="col-md-6">
             <img src="images/${book.image}" alt="Image" class="img-fluid">
@@ -70,8 +70,9 @@
 
           </div>
         </div>
+             </c:forEach>
       </div>
-        </c:forEach>
+       
     </div>
 
     <div class="site-section block-3 site-blocks-2 bg-light">

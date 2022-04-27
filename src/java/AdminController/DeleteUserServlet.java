@@ -2,24 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package ShopController;
+package AdminController;
 
-import DAO.BookDAO;
+import DAO.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Book;
+import model.Account;
 
 /**
  *
  * @author User
  */
-public class ShopSingleServlet extends HttpServlet {
+public class DeleteUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,10 @@ public class ShopSingleServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShopSingleServlet</title>");            
+            out.println("<title>Servlet DeleteUserServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShopSingleServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteUserServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,19 +59,26 @@ public class ShopSingleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Step 1: Get ID of product
-        String id_raw = request.getParameter("id").trim(); 
-        BookDAO bookdao = new BookDAO();
-        //Step 2: Get and put data of product to shop-single
-        try {
-            int id = Integer.parseInt(id_raw);
-            List<Book> booklist = new ArrayList<>();
-            Book book = bookdao.GetBookByID(id);
-            booklist.add(book);
-            request.setAttribute("book", booklist);
-        } catch (Exception e) {
+       //Step 1: Get session admin and check.
+        
+        HttpSession session = request.getSession(true);
+        Account acc = (Account) session.getAttribute("admin");
+        if (acc == null){
+            PrintWriter out = response.getWriter();
+            out.println("Access denied");
+        }else{
+        String id_raw = request.getParameter("id");
+        int id;
+        //Step 2: ProcessData
+            try {
+                id = Integer.parseInt(id_raw);
+                AccountDAO accdao = new AccountDAO();
+                accdao.DeleteAccount(id);
+                response.sendRedirect("list-user");
+            } catch (Exception e) {
+            }
+        
         }
-        request.getRequestDispatcher("shop-single.jsp").forward(request, response);
     }
 
     /**

@@ -37,128 +37,7 @@
 
     <body>
 
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <div class="sidebar-logo">
-                <img src="img/logo.jpg" alt="Comapny logo">
-                <div class="sidebar-close" id="sidebar-close">
-                    <i class='bx bx-left-arrow-alt'></i>
-                </div>
-            </div>
-            <div class="sidebar-user">
-                <div class="sidebar-user-info">
-                    <img src="img/users.png" alt="User picture" class="profile-image">
-                    <div class="sidebar-user-name">
-                        Hello ${sessionScope.admin.name}
-                    </div>
-                </div>
-                <button class="btn btn-outline">
-                    <a href="logout"><i class='bx bx-log-out bx-flip-horizontal'></i> </a>
-
-                </button>
-            </div>
-            <!-- SIDEBAR MENU -->
-            <ul class="sidebar-menu">
-                <li>
-                    <a href="dashboard" class="active">
-                        <i class='bx bx-home'></i>
-                        <span>dashboard</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-submenu">
-                    <a href="list" class="sidebar-menu-dropdown">
-                        <i class='bx bx-shopping-bag'></i>
-                        <span>Product</span>
-                        <div class="dropdown-icon"></div>
-                    </a>
-                    <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="listt">
-                                All product
-                            </a>
-                        </li>
-                        <li>
-                            <a href="add">
-                                add product
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-submenu">
-                    <a href="list-order" class="sidebar-menu-dropdown">
-                        <i class='bx bx-shopping-bag'></i>
-                        <span>Order</span>
-                        <div class="dropdown-icon"></div>
-                    </a>
-                    <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="list-order">
-                                all order
-                            </a>
-                        </li>
-                        <li>
-                            <a href="list-order?sort=1">
-                                Order Pending
-                            </a>
-                        </li>
-                        <li>
-                            <a href="list-order?sort=2">
-                                Order Finished
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-submenu">
-                    <a href="list-category" class="sidebar-menu-dropdown">
-                        <i class='bx bx-shopping-bag'></i>
-                        <span>Category</span>
-                        <div class="dropdown-icon"></div>
-                    </a>
-                    <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="list-category">
-                                all category
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li class="sidebar-submenu">
-                    <a href="list-user" class="sidebar-menu-dropdown">
-                        <i class='bx bx-user-circle'></i>
-                        <span>user</span>
-                        <div class="dropdown-icon"></div>
-                    </a>
-                    <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="list-user">
-                                List User
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </li>
-
-                <li class="sidebar-submenu">
-                    <a href="#" class="sidebar-menu-dropdown">
-                        <i class='bx bx-cog'></i>
-                        <span>settings</span>
-                        <div class="dropdown-icon"></div>
-                    </a>
-                    <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="#" class="darkmode-toggle" id="darkmode-toggle">
-                                darkmode
-                                <span class="darkmode-switch"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- END SIDEBAR MENU -->
-        </div>
-        <!-- END SIDEBAR -->
+        <jsp:include page="module/header-admin.jsp" flush="true"/>
         <!-- MAIN CONTENT -->
         <div class="main">
             <div class="main-header">
@@ -194,13 +73,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${requestScope.listuser}" var="p">
+                                        <c:forEach items="${requestScope.accountlist}" var="p">
                                             <tr>
                                                 <td>#${p.id}</td>
                                                 <td>
                                                     <div class="order-owner">
-                                                        <img src="img/users.png" alt="user image">
-                                                        <span>${p.name}</span>
+                                                        <img src="images/person_1.jpg" alt="user image">
+                                                        <span>${p.username}</span>
                                                     </div>
                                                 </td>
                                                 <td>$ ${p.password}</td>

@@ -71,7 +71,9 @@ public class BookDAO extends DBContext{
     }
     public static void main(String[] args) {
         BookDAO bookdao = new BookDAO();
-        List<Book> listb = bookdao.GetAllBook();
+        Book b  = bookdao.GetBookByID(4);
+        List<Book> listb = new ArrayList<>();
+        listb.add(b);
         System.out.println(listb.get(0).getName());
     }
 

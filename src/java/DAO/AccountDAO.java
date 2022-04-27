@@ -47,16 +47,16 @@ public class AccountDAO extends DBContext {
         return list;
     }
 //    
-//    public void DeleteAccount(int id) {
-//        String sql = "DELETE FROM [Account]"
-//                + "      WHERE account_id = ?";
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            st.setInt(1, id);
-//            st.executeUpdate();
-//        } catch (SQLException ex) {
-//        }
-//    }
+    public void DeleteAccount(int id) {
+        String sql = "DELETE FROM [Account]"
+                + "      WHERE account_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+        }
+    }
 //     public int TotalAccount() {
 //        String sql = "select COUNT(*) as 'Quantity' from Account";
 //        int n = 0;
@@ -139,4 +139,6 @@ public class AccountDAO extends DBContext {
 //
 //        }
 //    }
+
+   
 }

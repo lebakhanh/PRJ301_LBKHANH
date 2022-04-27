@@ -4,12 +4,19 @@
  */
 package AdminController;
 
+import DAO.AccountDAO;
+import DAO.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+import model.Account;
+import model.Order;
 
 /**
  *
@@ -55,8 +62,21 @@ public class ListUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //Step 1: Get session admin and check.
+        
+        HttpSession session = request.getSession(true);
+        Account acc = (Account) session.getAttribute("admin");
+        if (acc == null){
+            PrintWriter out = response.getWriter();
+            out.println("Access denied");
+        }else{
+        AccountDAO accdao = new AccountDAO();
+        List<Account> accountlist = accdao.GetAllAccount();
+        request.setAttribute("accountlist", accountlist);
+        request.getRequestDispatcher("ListUser.jsp").forward(request, response);
+        }
     }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
