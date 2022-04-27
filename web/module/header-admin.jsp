@@ -100,7 +100,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="register">
                             Add User
                         </a>
                     </li>

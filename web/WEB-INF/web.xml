@@ -72,6 +72,18 @@
         <servlet-name>DeleteUserServlet</servlet-name>
         <servlet-class>AdminController.DeleteUserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>AccountController.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AcceptServlet</servlet-name>
+        <servlet-class>AdminController.AcceptServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RejectServlet</servlet-name>
+        <servlet-class>AdminController.RejectServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShopServlet</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -153,6 +165,18 @@
     <servlet-mapping>
         <servlet-name>DeleteUserServlet</servlet-name>
         <url-pattern>/delete-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcceptServlet</servlet-name>
+        <url-pattern>/accept</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectServlet</servlet-name>
+        <url-pattern>/reject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

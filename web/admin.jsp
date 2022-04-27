@@ -51,7 +51,7 @@
                             </div>
                             <div class="counter-info">
                                 <div class="counter-count">
-                                    6578
+                                    ${totalbook}
                                 </div>
                                 <i class='bx bx-shopping-bag'></i>
                             </div>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="counter-info">
                                 <div class="counter-count">
-                                    30.5%
+                                    ${totalorder}
                                 </div>
                                 <i class='bx bx-chat'></i>
                             </div>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="counter-info">
                                 <div class="counter-count">
-                                    $9,780
+                                    $${profit}
                                 </div>
                                 <i class='bx bx-line-chart'></i>
                             </div>
@@ -102,7 +102,7 @@
                             </div>
                             <div class="counter-info">
                                 <div class="counter-count">
-                                    690
+                                    ${totalacc}
                                 </div>
                                 <i class='bx bx-user'></i>
                             </div>
@@ -178,7 +178,27 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- APP JS -->
     <script src="js/app.js"></script>
+    <script>
+        let cate = []
+        let tt = []
+                <c:forEach items="${requestScope.listcate}" var="c">
+                    cate.push("${c.name}")
+                </c:forEach>
+                    <c:forEach items="${requestScope.quatitycate}" var="z">
+                    tt.push("${z}")
+                </c:forEach>
+        let category_options = {
+    series: [44, 55, 41, 17],
+    labels: cate,
+    chart: {
+        type: 'donut',
+    },
+    colors: ['#6ab04c', '#2980b9', '#f39c12', '#d35400']
+}
 
+let category_chart = new ApexCharts(document.querySelector("#category-chart"), category_options)
+category_chart.render()
+    </script>
 </body>
 
 </html>

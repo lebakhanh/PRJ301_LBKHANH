@@ -93,34 +93,13 @@ public class CheckOutServlet extends HttpServlet {
             OrderDAO orderdao = new OrderDAO();
   
             Order order = new Order(name, 0, email, phone, address, note, "0", totalPrice);
-            
-//            System.out.println(order.getFullname());
-//            System.out.println(order.getEmail());
-//            System.out.println(order.getPhone_number());
-//            System.out.println(order.getAddress());
-//            System.out.println(order.getNote());
-//            System.out.println(order.getStatus());
-//            System.out.println(order.getTotal_money());
-
-            //Get ID of order    
-            int n = orderdao.CreateOrderAndReturnId(order);
-//            System.out.println(n + "=============");
-//            //Save Order to Order Detail
-//            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
-//                Integer productId = entry.getKey();
-//                Cart cart = entry.getValue();
-//                System.out.println(cart.getShoes().getName());
-//                System.out.println(cart.getShoes().getId());
-//                System.out.println(cart.getShoes().getPrice());
-//                System.out.println(cart.getQuantity());
-//                System.out.println(cart.getQuantity()*cart.getShoes().getPrice());
-//            }
-//                   
+     
+            int n = orderdao.CreateOrderAndReturnId(order);            
             orderdao.SaveOrderDetail(n, carts);
             
             //Remove Carts
             session.removeAttribute("carts");
-            response.sendRedirect("shop");
+            response.sendRedirect("index");
         }
 
     }

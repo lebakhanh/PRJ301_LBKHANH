@@ -4,26 +4,22 @@
  */
 package AdminController;
 
-import DAO.AccountDAO;
-import DAO.BookDAO;
-import DAO.CategoryDAO;
 import DAO.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.Book;
-import model.Category;
+import model.Account;
+import model.Order;
 
 /**
  *
  * @author User
  */
-public class AdminServlet extends HttpServlet {
+public class RejectServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +38,10 @@ public class AdminServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminServlet</title>");            
+            out.println("<title>Servlet RejectServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RejectServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,39 +59,18 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BookDAO bookdao = new BookDAO();
+       HttpSession session = request.getSession(true);
+        Account a = (Account) session.getAttribute("admin");
+        if (a == null){
+            PrintWriter out = response.getWriter();
+            out.println("Access denied");
+        }else{
+        int id = Integer.parseInt(request.getParameter("id"));
         OrderDAO orderdao = new OrderDAO();
-        AccountDAO accdao = new AccountDAO();
-        //Top book
-        List<Book> listbook = bookdao.GetTopBook();
-        request.setAttribute("listbook", listbook);
-        //NumofBook
-        int z = bookdao.NumOfBook();
-        request.setAttribute("totalbook", z);
-        //NumofOrder
-        int x = orderdao.NumOfOrder();
-        
-        request.setAttribute("totalorder", x);
-        //NumofAccount
-        int y = accdao.NumOfAccount();
-        
-        request.setAttribute("totalacc", y);
-        //Profit
-        int c = orderdao.Profit();
-        
-        request.setAttribute("profit", c);
-        //Category
-        CategoryDAO catedao = new CategoryDAO();
-        List<Category> listcate = catedao.GetAllCategory();
-        request.setAttribute("listcate", listcate);
-        //Total of each category
-        List<Integer> quatitycate = new ArrayList<>();
-        for (int i = 1; i < listcate.size(); i++) {
-            int n = catedao.QuantityCategory(i);
-            quatitycate.add(n);
-        }
-        request.setAttribute("quatitycate", quatitycate);
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        Order order = orderdao.GetOrderByID(id);
+        orderdao.UpdateSetStatus("2", id);
+        response.sendRedirect("list-order");
+    }
     }
 
     /**

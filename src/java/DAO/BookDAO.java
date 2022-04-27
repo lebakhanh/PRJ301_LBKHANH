@@ -34,7 +34,7 @@ public class BookDAO extends DBContext{
         return list;
     }
     public Book GetBookByID(int id) {
-        String sql = "select * from Book b join Category c on (b.Book_id = c.category_id) where b.Book_id = ?";
+        String sql = "select * from Book b join Category c on (b.category_id = c.category_id) where b.Book_id = ?";
       
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -117,7 +117,7 @@ public class BookDAO extends DBContext{
     }
 
     public List<Book> SearchBookByName(String search) {
-        String sql = "select * from Book b join Category c on (b.Book_id = c.category_id) where b.Book_name like ?";
+        String sql = "select * from Book b join Category c on (b.category_id = c.category_id) where b.Book_name like ?";
         List<Book> list = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -133,7 +133,7 @@ public class BookDAO extends DBContext{
         return list;
     }
     public List<Book> SearchBookByCategory(int cid) {
-        String sql = "select * from Book b join Category c on (b.Book_id = c.category_id) where c.category_id = ?";
+        String sql = "select * from Book b join Category c on (b.category_id = c.category_id) where c.category_id = ?";
         List<Book> list = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -149,7 +149,7 @@ public class BookDAO extends DBContext{
         return list;
     }
     public List<Book> GetTopBook() {
-        String sql = "select TOP 4 * from Book b join Category c on (b.Book_id = c.category_id)";
+        String sql = "select TOP 4 * from Book b join Category c on (b.category_id = c.category_id)";
         List<Book> list = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -162,5 +162,93 @@ public class BookDAO extends DBContext{
         } catch (SQLException e) {
         }
         return list;
+    }
+
+    public List<Book> GetAllBookPriceAsc() {
+         String sql = "select * from Book b join Category c on (b.category_id = c.category_id) order by b.Book_price asc";
+              List<Book> list = new ArrayList<>();
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Category g = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                Book b = new Book(rs.getInt("Book_id"), rs.getString("Book_name"), rs.getFloat("Book_price"), rs.getInt("Book_quantity"), rs.getString("Book_image"), g);
+              list.add(b);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
+    public List<Book> GetAllBookPriceDesc() {
+         String sql = "select * from Book b join Category c on (b.category_id = c.category_id) order by b.Book_price desc";
+              List<Book> list = new ArrayList<>();
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Category g = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                Book b = new Book(rs.getInt("Book_id"), rs.getString("Book_name"), rs.getFloat("Book_price"), rs.getInt("Book_quantity"), rs.getString("Book_image"), g);
+              list.add(b);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
+    public List<Book> GetAllBookNameAZ() {
+         String sql = "select * from Book b join Category c on (b.category_id = c.category_id) order by b.Book_name asc";
+              List<Book> list = new ArrayList<>();
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Category g = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                Book b = new Book(rs.getInt("Book_id"), rs.getString("Book_name"), rs.getFloat("Book_price"), rs.getInt("Book_quantity"), rs.getString("Book_image"), g);
+              list.add(b);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
+    public List<Book> GetAllBookNameZA() {
+         String sql = "select * from Book b join Category c on (b.category_id = c.category_id) order by b.Book_price desc";
+              List<Book> list = new ArrayList<>();
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Category g = new Category(rs.getInt("category_id"), rs.getString("category_name"));
+                Book b = new Book(rs.getInt("Book_id"), rs.getString("Book_name"), rs.getFloat("Book_price"), rs.getInt("Book_quantity"), rs.getString("Book_image"), g);
+              list.add(b);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
+    public int NumOfBook() {
+        String sql = "select COUNT(*) as 'TotalC' from Book";
+        int n = 0;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                n = rs.getInt("TotalC");
+                return n;
+            }
+        } catch (Exception e) {
+        }
+        return n;
     }
 }

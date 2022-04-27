@@ -60,7 +60,63 @@ public class OrderDAO extends DBContext {
         }
         return 0;
     }
-    
+    public Order GetOrderByID(int id) {
+        String sql = "select * from [Order] where ID = ?";
+        Order order = new Order();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                order = new Order(rs.getInt("id"), rs.getString("fullname"), rs.getInt("account_id"), rs.getString("email"), rs.getString("phone_number"), rs.getString("address"), rs.getString("note"), rs.getString("status"), rs.getInt("total_money"), rs.getDate("Date"));
+                return order;
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+    public int NumOfOrder() {
+        String sql = "select COUNT(*) as 'TotalC' from [Order]";
+        int n = 0;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                n = rs.getInt("TotalC");
+                return n;
+            }
+        } catch (Exception e) {
+        }
+        return n;
+    }
+    public int Profit() {
+        String sql = "select SUM(total_money) as 'tt' from [Order]";
+        int n = 0;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                n = rs.getInt("tt");
+                return n;
+            }
+        } catch (Exception e) {
+        }
+        return n;
+    }
+    public void UpdateSetStatus(String status, int id) {
+            String sql = "UPDATE [Order]\n"
+                    + "   SET [status] = ?\n"
+                    + " WHERE id = ?";
+            try {
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setString(1, status);
+                st.setInt(2, id);
+                st.executeUpdate();
+            } catch (Exception ex) {
+            }
+        }
     public void SaveOrderDetail(int orderid, Map<Integer, Cart> carts) {
         try {
             String sql = "INSERT INTO [Order_Details]\n" +

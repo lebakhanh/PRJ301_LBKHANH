@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Book;
 import model.Category;
@@ -39,7 +40,7 @@ public class ShopServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShopServlet</title>");            
+            out.println("<title>Servlet ShopServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ShopServlet at " + request.getContextPath() + "</h1>");
@@ -69,7 +70,7 @@ public class ShopServlet extends HttpServlet {
         BookDAO bookdao = new BookDAO();
         List<Book> listbook_raw = bookdao.GetAllBook();
         int numPs, numperPage, numpage, start, end, page;
-        numPs = listbook_raw .size();
+        numPs = listbook_raw.size();
         numperPage = 6;
         numpage = numPs / numperPage + (numPs % numperPage == 0 ? 0 : 1);
         String tpage = request.getParameter("page");
@@ -84,61 +85,99 @@ public class ShopServlet extends HttpServlet {
         } else {
             end = page * numperPage;
         }
-        List<Book> listbook = bookdao.getListByPage(listbook_raw , start, end);
+        List<Book> listbook = bookdao.getListByPage(listbook_raw, start, end);
         request.setAttribute("num", numpage);
         request.setAttribute("page", page);
         request.setAttribute("listbook", listbook);
-        
+
         //3.Search
         String search = request.getParameter("search");
-        if(search!=null){
+        if (search != null) {
             List<Book> listsearch = bookdao.SearchBookByName(search);
             numPs = listsearch.size();
-        numperPage = 6;
-        numpage = numPs / numperPage + (numPs % numperPage == 0 ? 0 : 1);
-         tpage = request.getParameter("page");
-        try {
-            page = Integer.parseInt(tpage);
-        } catch (NumberFormatException e) {
-            page = 1;
+            numperPage = 6;
+            numpage = numPs / numperPage + (numPs % numperPage == 0 ? 0 : 1);
+            tpage = request.getParameter("page");
+            try {
+                page = Integer.parseInt(tpage);
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
+            start = (page - 1) * numperPage;
+            if (page * numperPage > numPs) {
+                end = numPs;
+            } else {
+                end = page * numperPage;
+            }
+            listbook = bookdao.getListByPage(listsearch, start, end);
+            request.setAttribute("num", numpage);
+            request.setAttribute("page", page);
+            request.setAttribute("listbook", listbook);
         }
-        start = (page - 1) * numperPage;
-        if (page * numperPage > numPs) {
-            end = numPs;
-        } else {
-            end = page * numperPage;
-        }
-        listbook = bookdao.getListByPage(listsearch , start, end);
-        request.setAttribute("num", numpage);
-        request.setAttribute("page", page);
-        request.setAttribute("listbook", listbook);
-        }
-       
+
         //4. Category Tab
         String cid_raw = request.getParameter("cid");
-        if(cid_raw!=null){
-        int cid = Integer.parseInt(cid_raw);
-        List<Book> listsearcht = bookdao.SearchBookByCategory(cid);
-        numPs = listsearcht.size();
-        numperPage = 6;
-        numpage = numPs / numperPage + (numPs % numperPage == 0 ? 0 : 1);
-         tpage = request.getParameter("page");
-        try {
-            page = Integer.parseInt(tpage);
-        } catch (NumberFormatException e) {
-            page = 1;
+        if (cid_raw != null) {
+            int cid = Integer.parseInt(cid_raw);
+            List<Book> listsearcht = bookdao.SearchBookByCategory(cid);
+            numPs = listsearcht.size();
+            numperPage = 6;
+            numpage = numPs / numperPage + (numPs % numperPage == 0 ? 0 : 1);
+            tpage = request.getParameter("page");
+            try {
+                page = Integer.parseInt(tpage);
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
+            start = (page - 1) * numperPage;
+            if (page * numperPage > numPs) {
+                end = numPs;
+            } else {
+                end = page * numperPage;
+            }
+            listbook = bookdao.getListByPage(listsearcht, start, end);
+            request.setAttribute("num", numpage);
+            request.setAttribute("page", page);
+            request.setAttribute("listbook", listbook);
         }
-        start = (page - 1) * numperPage;
-        if (page * numperPage > numPs) {
-            end = numPs;
-        } else {
-            end = page * numperPage;
+
+        // Sort
+        String sort_raw = request.getParameter("sort");
+        if (sort_raw != null) {
+            int sort = Integer.parseInt(sort_raw);
+            List<Book> listsort = new ArrayList<>();
+            if (sort == 1) {
+                listsort = bookdao.GetAllBookPriceAsc();
+            } else if (sort == 2) {
+                listsort = bookdao.GetAllBookPriceDesc();
+            } else if (sort == 3) {
+                listsort = bookdao.GetAllBookNameAZ();
+            } else if (sort == 4) {
+                listsort = bookdao.GetAllBookNameZA();
+            }
+            numPs = listsort.size();
+            numperPage = 9;
+            numpage = numPs / numperPage + (numPs % numperPage == 0 ? 0 : 1);
+            tpage = request.getParameter("page");
+            try {
+                page = Integer.parseInt(tpage);
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
+            start = (page - 1) * numperPage;
+            if (page * numperPage > numPs) {
+                end = numPs;
+            } else {
+                end = page * numperPage;
+            }
+            
+            request.setAttribute("sort", sort);
+            listbook = bookdao.getListByPage(listsort, start, end);
+            request.setAttribute("num", numpage);
+            request.setAttribute("page", page);
+            request.setAttribute("listbook", listbook);
         }
-        listbook = bookdao.getListByPage(listsearcht , start, end);
-        request.setAttribute("num", numpage);
-        request.setAttribute("page", page);
-        request.setAttribute("listbook", listbook);
-        }
+
         //Step 2: Send Redirect User
         request.getRequestDispatcher("shop.jsp").forward(request, response);
     }

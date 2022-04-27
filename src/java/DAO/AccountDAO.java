@@ -31,7 +31,21 @@ public class AccountDAO extends DBContext {
         }
         return null;
     }
-    
+    public int NumOfAccount() {
+        String sql = "select COUNT(*) as 'TotalC' from [Account]";
+        int n = 0;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                n = rs.getInt("TotalC");
+                return n;
+            }
+        } catch (Exception e) {
+        }
+        return n;
+    }
     public List<Account> GetAllAccount() {
         String sql = "SELECT * FROM Account";
         List<Account> list = new ArrayList<>();
@@ -85,38 +99,38 @@ public class AccountDAO extends DBContext {
 //        }
 //        return null;
 //    }
-//       public void AddAccount(Account acc) {
-//
-//        try {
-//            String sql = "INSERT INTO [Users]\n" +
-//"           ([users_id]\n" +
-//"           ,[users_name]\n" +
-//"           ,[users_password]\n" +
-//"           ,[users_email]\n" +
-//"           ,[users_phone]\n" +
-//"           ,[users_address]\n" +
-//"           ,[users_role])\n" +
-//"     VALUES\n" +
-//"           (?\n" +
-//"           ,?\n" +
-//"           ,?\n" +
-//"           ,?\n" +
-//"           ,?\n" +
-//"           ,?\n" +
-//"           ,?)";
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            st.setInt(1, 41);
-//        
-//            st.setString(2, acc.getPassword());
-//            st.setString(3, acc.getEmail());
-//            st.setString(4, acc.getPhone());
-//            st.setString(5, acc.getAddress());
-//            st.setBoolean(6, false);         
-//             st.executeUpdate();
-//        } catch (SQLException ex) {
-//
-//        }
-//    }
+       public void AddAccount(Account acc) {
+
+        try {
+            String sql = "INSERT INTO [Account]\n" +
+"           ([account_username]\n" +
+"           ,[account_password]\n" +
+"           ,[account_name]\n" +
+"           ,[account_email]\n" +
+"           ,[account_phone]\n" +
+"           ,[account_address]\n" +
+"           ,[account_role])\n" +
+"     VALUES\n" +
+"           (?\n" +
+"           ,?\n" +
+"           ,?\n" +
+"           ,?\n" +
+"           ,?\n" +
+"           ,?\n" +
+"           ,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, acc.getUsername());
+            st.setString(2, acc.getPassword());
+            st.setString(3, acc.getName());
+            st.setString(4, acc.getEmail());
+            st.setString(5, acc.getPhone());
+            st.setString(6, acc.getAddress());
+            st.setBoolean(7, false);         
+             st.executeUpdate();
+        } catch (SQLException ex) {
+
+        }
+    }
 //        public void UpdateAccount(Account acc) {
 //
 //        try {

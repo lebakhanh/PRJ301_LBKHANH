@@ -61,6 +61,7 @@ public class CategoryDAO extends DBContext {
         }
         return n;
     }
+    
 
     public static void main(String[] args) {
         CategoryDAO dao = new CategoryDAO();

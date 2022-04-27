@@ -75,6 +75,7 @@ public class ListOrder extends HttpServlet {
         String sort_raw = request.getParameter("sort");
         if (sort_raw != null) {
             int sort = Integer.parseInt(sort_raw);
+           
             if (sort == 1) {
                 orderlist = orderdao.GetAllOrderByStatus("0");
             } else if (sort == 2) {
@@ -82,6 +83,8 @@ public class ListOrder extends HttpServlet {
 
             } else if (sort == 3) {
                 orderlist = orderdao.GetAllOrderByStatus("2");
+            } else if(sort == 4){
+                orderlist = orderdao.GetAllOrder();
             }
         }
         request.setAttribute("orderlist", orderlist);

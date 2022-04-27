@@ -67,7 +67,7 @@
                                             <th>Phone</th>
                                             <th>Address</th>
                                             <th>Role</th>
-                                            <th>Update</th>
+                                           
                                             <th>Delete</th>
 
                                         </tr>
@@ -103,12 +103,7 @@
                                                         User
                                                     </c:if>
                                                 </td>
-                                                <td>
-                                                    <span class="order-status order-ready">
-                                                        <a href="update-user?id=${p.id}">Update</td>
-                                                    </span>
-
-                                                </td>
+                                               
                                                 <td>
                                                     <span class="order-status order-ready">
                                                         <a href="#" onclick="doDelete('${p.id}')">Delete</td>

@@ -48,7 +48,10 @@
                     <div class="col-md-5">                                    
                                 <form id="f" action="list-order?sort=${requestScope.sort}?page=${requestScope.page}">
                                     <select name="sort" onchange="document.getElementById('f').submit()"> 
-                                        <option>All list</option>
+                                        <option value="0">Selected</option>
+                                        <option value="4" <c:if test="${sort==4}">
+                                                selected
+                                            </c:if> >All Order</option>
                                         <option value="1" <c:if test="${sort==1}">
                                                 selected
                                             </c:if> >Pending Order</option>
@@ -127,11 +130,7 @@
                                            
                                             </c:if>
                                                 <td>$${order.total_money}</td>
-                                                        <td>
-                                                    <span class="order-status order-ready">
-                                                    <a href="#" onclick="doDelete('${order.id}')">Delete
-                                                </span>
-                                                    </td>
+                                                       
                                                 
                                             
                                             <c:if test="${order.status==0}">
